@@ -50,7 +50,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/firecrawl-api:latest
+            ${{ env.REGISTRY }}/${{ github.actor }}/firecrawl-api:latest
 
       - name: Build and push latest image (apps/playwright-service)
         uses: docker/build-push-action@v5
@@ -59,7 +59,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/firecrawl-playwright-service:latest
+            ${{ env.REGISTRY }}/${{ github.actor }}/firecrawl-playwright-service:latest
 
       - name: Checkout latest tag
         if: env.LATEST_TAG != ''
@@ -75,7 +75,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/firecrawl-api:${{ env.LATEST_TAG }}
+            ${{ env.REGISTRY }}/${{ github.actor }}/firecrawl-api:${{ env.LATEST_TAG }}
 
       - name: Build and push tagged version (apps/playwright-service)
         if: env.LATEST_TAG != ''
@@ -85,4 +85,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/firecrawl-playwright-service:${{ env.LATEST_TAG }}
+            ${{ env.REGISTRY }}/${{ github.actor }}/firecrawl-playwright-service:${{ env.LATEST_TAG }}
