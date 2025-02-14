@@ -6,7 +6,7 @@ on:
   workflow_dispatch:  # Allow manual trigger
 
 env:
-  UPSTREAM_REPO: "https://github.com/mendableai/firecrawl"
+  UPSTREAM_REPO: "mendableai/firecrawl"
   REGISTRY: ghcr.io
 
 jobs:
@@ -22,10 +22,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          repository: ${{ env.UPSTREAM_REPO }}
 
-      - name: Clone upstream repository
-        run: |
-          git clone ${{ env.UPSTREAM_REPO }} upstream
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -46,7 +45,7 @@ jobs:
       - name: Build and push latest image
         uses: docker/build-push-action@v5
         with:
-          context: ./upstream/apps/${{ matrix.component }}
+          context: ./apps/${{ matrix.component }}
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
