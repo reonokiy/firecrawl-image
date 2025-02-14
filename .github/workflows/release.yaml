@@ -50,6 +50,7 @@ jobs:
           context: ./apps/${{ matrix.component }}
           platforms: linux/amd64,linux/arm64
           push: true
+          provenance: false
           tags: |
             ${{ env.REGISTRY }}/${{ github.actor }}/firecrawl-${{ matrix.component }}:${{ github.event.inputs.tag }}
 
